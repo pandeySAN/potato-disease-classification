@@ -6,8 +6,8 @@ A full-stack web application that uses a Convolutional Neural Network (CNN) mode
 
 ## 📸 Demo
 
-![Uploading image.png…]()
-
+[![Uploading image.png…]()
+](https://drive.google.com/file/d/1wj3kjB436cyMHLzXhxgmPfFFBPD0hj1h/view?usp=sharing)
 ---
 
 ## 🧠 Tech Stack
