@@ -1,151 +1,118 @@
-# 🥔 Potato Disease Detection using Deep Learning
+# 🥔 Potato Leaf Disease Detector
 
-A full-stack application for detecting potato leaf diseases using a Convolutional Neural Network model served via FastAPI backend and a (to be built) React frontend.
+A full-stack web application that uses a Convolutional Neural Network (CNN) model to detect three types of potato leaf conditions: **Early Blight**, **Late Blight**, and **Healthy**. This tool helps farmers and agriculture experts diagnose potato crop diseases by uploading a leaf image.
+
+---
+
+## 📸 Demo
+
+![Uploading image.png…]()
+
+---
+
+## 🧠 Tech Stack
+
+### Frontend
+
+* **React.js**: Built with functional components.
+* **Material-UI**: Used for beautiful UI components.
+* **Axios**: For API calls.
+
+### Backend
+
+* **FastAPI**: Lightweight and high-performance Python API.
+* **Uvicorn**: ASGI server.
+* **TensorFlow/Keras**: For loading and running the trained deep learning model.
+
+### Machine Learning
+
+* **Model**: A Convolutional Neural Network (CNN) trained using PlantVillage dataset.
+* **Frameworks**: TensorFlow, Keras
+* **Dataset**: Potato leaf images categorized into Early Blight, Late Blight, and Healthy.
 
 ---
 
 ## 📁 Project Structure
 
 ```
-potato-disease/
+POTATO-DISEASE
 │
-├── api/                    # FastAPI backend
-│   ├── main.py             # API to handle prediction requests
-│   ├── main-tf-serving.py  # Alternative TensorFlow Serving API (if needed)
-│   ├── requirement.txt     # Backend dependencies
+├── api
+│   ├── main.py                # FastAPI backend
+│   ├── requirement.txt        # Python dependencies
 │
-├── models/
-│   └── 1.h5                # Trained Keras model
+├── frontend
+│   ├── src
+│   │   ├── App.js
+│   │   ├── home.js            # Main upload & prediction interface
+│   │   ├── bg.png            # Background image
+│   │   ├── leaf.png          # UI Leaf image
 │
-├── training/
-│   ├── PlantVillage/       # Dataset directory
-│   └── training.ipynb      # Jupyter Notebook for training
+├── models
+│   └── 1.h5                   # Trained CNN model
 │
-├── frontend/               # Frontend (to be developed)
-│
-├── model.config            # Model config (if using TF Serving)
-└── .venv/                  # Virtual environment
+├── training
+│   ├── training.ipynb        # Jupyter Notebook for training
+│   └── PlantVillage          # Dataset folder
 ```
 
 ---
 
-## 🚀 How to Run the Project
+## 🚀 Setup Instructions
 
-### 🧠 Prerequisites
-
-* Python 3.10+
-* Node.js 18+ (for frontend)
-* `virtualenv` or `venv` for isolated environment
-
----
-
-### 🔧 Backend Setup (FastAPI)
+### 1️⃣ Backend (FastAPI)
 
 ```bash
-# 1. Navigate to API directory
 cd api
-
-# 2. Activate virtual environment
-# Windows
-.\.venv\Scripts\activate
-# Unix/macOS
-source .venv/bin/activate
-
-# 3. Install dependencies
+python -m venv venv
+venv\Scripts\activate      # On Windows
 pip install -r requirement.txt
-
-# 4. Run the FastAPI server
-python main.py
+uvicorn main:app --reload
 ```
 
-📍 Visit `http://localhost:8000/docs` to open the Swagger UI for testing.
-
----
-
-## 📤 API Endpoints
-
-| Method | Endpoint   | Description                     |
-| ------ | ---------- | ------------------------------- |
-| GET    | `/ping`    | Check if API is alive           |
-| POST   | `/predict` | Upload image and get prediction |
-
-**POST /predict**
-
-* **Request:** multipart/form-data
-
-  * `file`: image file (.jpg/.png)
-* **Response:**
-
-```json
-{
-  "class": "Early Blight",
-  "confidence": 0.9873
-}
-```
-
----
-
-### 🖼 Sample Model Info
-
-* Format: `.h5` (Keras)
-* Classes: `Early Blight`, `Late Blight`, `Healthy`
-* Input shape: 256x256 RGB image
-
----
-
-### 🎯 Frontend Setup (React - Vite)
-
-If you haven’t created the frontend yet:
+### 2️⃣ Frontend (React)
 
 ```bash
 cd frontend
-npm create vite@latest
-# Choose React + JavaScript
-cd your-project-name
 npm install
-npm run dev
+npm start
 ```
 
-Make POST requests to `http://localhost:8000/predict`.
+📌 Make sure to set the API URL in your `.env`:
+
+```
+REACT_APP_API_URL=http://localhost:8000/predict
+```
 
 ---
 
-### 🧪 Model Training (Jupyter)
+## 🧪 API Endpoints
 
-* Navigate to `training/training.ipynb` to see the data preprocessing, model training, and evaluation steps using the **PlantVillage** dataset.
-
----
-
-## 📦 Dependencies
-
-Backend (FastAPI):
-
-* `fastapi`
-* `uvicorn`
-* `pillow`
-* `tensorflow`
-* `keras`
-* `numpy`
-
-Frontend (if React):
-
-* `vite`
-* `react`
-* `axios` (for API calls)
+| Method | Endpoint   | Description                     |
+| ------ | ---------- | ------------------------------- |
+| GET    | `/ping`    | Health check route              |
+| POST   | `/predict` | Upload image and get prediction |
 
 ---
 
-## 🏁 Future Improvements
+## 📝 Future Improvements
 
-* ✅ Add frontend image upload and display result
-* ⏳ Dockerize backend and frontend
-* ⏳ Deploy to cloud (Render, Vercel, etc.)
+* Add voice/image capture via mobile
+* Export predictions to PDF/CSV
+* Add multilingual support for farmers
+* Improve model accuracy with more data
+
+---
+
+## 🙌 Acknowledgements
+
+* [PlantVillage Dataset](https://www.kaggle.com/datasets/emmarex/plantdisease)
+* TensorFlow + FastAPI community
 
 ---
 
-## 👨‍🔬 Author
+## 📌 Author
 
-**Sanchit Pandey**
-Built with ❤️ for real-world ML problem-solving.
+**Sanchit Pandey** – B.Tech CSE (AI & ML)
 
----
+> Built as part of an effort to assist farmers with expert-level crop disease diagnosis on demand.
