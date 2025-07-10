@@ -23,7 +23,7 @@ app.add_middleware(
 )
 
 
-MODEL = load_model("models/1.h5")
+MODEL = load_model("../models/1.h5")
 
 
 CLASS_NAMES = ["Early Blight", "Late Blight", "Healthy"]
